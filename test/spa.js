@@ -14,6 +14,14 @@ var liveServerSpaIgnoreAssets = require('..').start({
 });
 
 describe('spa tests', function(){
+	before(function(done){
+		Promise.all([liveServerSpa, liveServerSpaIgnoreAssets]).then(function(servers){
+			liveServerSpa = servers[0];
+			liveServerSpaIgnoreAssets = servers[1];
+		}).finally(function(){
+			done();
+		});
+	});
 	it('spa should redirect', function(done){
 		request(liveServerSpa)
 			.get('/api')

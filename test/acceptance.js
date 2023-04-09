@@ -7,6 +7,13 @@ var liveServer = require('..').start({
 });
 
 describe('basic functional tests', function(){
+	before(function(done){
+		liveServer.then(function(server){
+			liveServer = server;
+		}).finally(function(){
+			done();
+		});
+	});
 	it('should respond with index.html', function(done){
 		request(liveServer)
 			.get('/')

@@ -25,6 +25,15 @@ var liveServer3 = require('..').start({
 });
 
 describe('middleware tests', function() {
+	before(function(done) {
+		Promise.all([liveServer1, liveServer2, liveServer3]).then(function(servers) {
+			liveServer1 = servers[0];
+			liveServer2 = servers[1];
+			liveServer3 = servers[2];
+		}).finally(function() {
+			done();
+		});
+	});
 	it("should respond with middleware function's status code", function(done) {
 		request(liveServer1)
 			.get('/')

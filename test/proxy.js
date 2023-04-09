@@ -16,6 +16,14 @@ var server2 = require('..').start({
 });
 
 describe('proxy tests', function() {
+	before(function(done) {
+		Promise.all([server1, server2]).then(function(servers) {
+			server1 = servers[0];
+			server2 = servers[1];
+		}).finally(function() {
+			done();
+		});
+	});
 	it('should respond with proxied content', function(done) {
 		request(server2)
 			.get('/server1/index.html')

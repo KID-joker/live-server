@@ -8,6 +8,13 @@ var liveServer = require('..').start({
 });
 
 describe('htpasswd tests', function() {
+	before(function(done) {
+		liveServer.then(function(server) {
+			liveServer = server;
+		}).finally(function() {
+			done();
+		});
+	});
 	it('should respond with 401 since no password is given', function(done) {
 		request(liveServer)
 			.get('/')

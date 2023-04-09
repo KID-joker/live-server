@@ -1,6 +1,6 @@
 {
-  "name": "live-server",
-  "version": "1.2.2",
+  "name": "@kid-joker/live-server",
+  "version": "1.0.0",
   "description": "simple development http server with live reload capability",
   "keywords": [
     "front-end",
@@ -10,7 +10,7 @@
     "http",
     "cli"
   ],
-  "author": "Tapio Vierros",
+  "author": "KID-joker",
   "dependencies": {
     "chokidar": "^2.0.4",
     "colors": "1.4.0",
@@ -42,7 +42,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tapio/live-server.git"
+    "url": "https://github.com/KID-joker/live-server.git"
   },
   "engines": {
     "node": ">=0.10.0"

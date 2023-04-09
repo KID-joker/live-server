@@ -11,6 +11,13 @@ var liveServer = require('..').start({
 });
 
 describe('mount tests', function() {
+	before(function(done) {
+		liveServer.then(function(server) {
+			liveServer = server;
+		}).finally(function() {
+			done();
+		});
+	});
 	it('should respond with sub.html', function(done) {
 		request(liveServer)
 			.get('/mounted/sub.html')

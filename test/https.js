@@ -4,6 +4,13 @@ var path = require('path');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 function tests(liveServer) {
+	before(function(done) {
+		liveServer.then(function(server) {
+			liveServer = server;
+		}).finally(function() {
+			done();
+		});
+	});
 	it('should reply with a correct index file', function(done) {
 		request(liveServer)
 			.get('/index.html')
@@ -17,6 +24,9 @@ function tests(liveServer) {
 			.expect('Content-Type', 'text/html; charset=UTF-8')
 			.expect(200, done);
 	});
+	after(function() {
+		liveServer.close();
+	});
 }
 
 describe('https tests with external module', function() {
@@ -28,9 +38,6 @@ describe('https tests with external module', function() {
 	};
 	var liveServer = require("..").start(opts);
 	tests(liveServer);
-	after(function () {
-		liveServer.close()
-	});
 });
 
 describe('https tests with object', function() {
@@ -42,7 +49,4 @@ describe('https tests with object', function() {
 	};
 	var liveServer = require("..").start(opts);
 	tests(liveServer);
-	after(function () {
-		liveServer.close()
-	});
 });

@@ -8,6 +8,13 @@ var liveServer = require('..').start({
 });
 
 describe('cors tests', function() {
+	before(function(done) {
+		liveServer.then(function(server) {
+			liveServer = server;
+		}).finally(function() {
+			done();
+		});
+	});
 	it('should respond with appropriate header', function(done) {
 		request(liveServer)
 			.get('/index.html')
