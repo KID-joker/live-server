@@ -242,6 +242,9 @@ LiveServer.start = function(options) {
 		// Handle server startup errors
 		server.addListener('error', function(e) {
 			if (e.code === 'EADDRINUSE') {
+				if(options.port !== undefined && options.port !== 0) {
+					return reject('port:' + port + ' is already in use.');
+				}
 				var serveURL = protocol + '://' + host + ':' + port;
 				console.log('%s is already in use. Trying another port.'.yellow, serveURL);
 				setTimeout(function() {
